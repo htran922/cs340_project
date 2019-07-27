@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+  <link rel="stylesheet" href="style.css" tyle="text/css">
+  </head>
+  <body>
+   <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div class="topnav" id="myTopnav">
+      <a href="/~lapank/cs340/index.html">Database Outline</a>
+      <a href="/~lapank/cs340/artifact.html">Artifact</a>
+      <a href="/~lapank/cs340/event.html">Event</a>
+      <a href="/~lapank/cs340/exhibition.html">Exhibition</a>
+      <a href="/~lapank/cs340/staff.html"class="active">Staff</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+      </a>
+    </div>
+
+    <div class="content">
+      <h1>Exhibition Form: Smithsonian National Museum of Natural History</h1>
+      <p>View and edit Events<p>
+ 
+    <form action="http://classes.engr.oregonstate.edu/eecs/winter2018/cs290-400/tools/class-content/form_tests/check_request.php" method="get">
+    <fieldset>
+      
+    <legend><h2>Add Staff</h2></legend>
+      <div class="form_field">
+        <label>New Staff ID:</label><span id="auto-gen-id">___</span>
+      </div>
+      <div class="form_field">
+        <label>First Name:
+        <input type="text" name="material">
+        </label>
+      </div>
+      <div class="form_field">
+        <label>Last Name:
+        <input type="text" name="material">
+        </label>
+      </div>
+      <div class="form_field">
+        <label>Job</label>
+        <select name="event-type">
+          <option value="concert">Curator</option>
+          <option value="lecture">Public Programs Sepcialist</option>
+          <option value="gala">Conservator</option>
+          <option value="movie">Archivist</option>
+        </select>
+      </div>    
+      <div class="form_field">
+        <input class="submit" type="submit" name="submitStudent" value="Submit">
+      </div>
+    </fieldset>
+  </form>
+  <hr>
+  
+
+  <form action="http://classes.engr.oregonstate.edu/eecs/winter2018/cs290-400/tools/class-content/form_tests/check_request.php" method="get">
+  <fieldset>
+    <legend><h2>Edit Staff</h2></legend>
+      <div class="form_field">
+        <label>Staff ID:</label><input type="number" name="id"
+       min="10" max="100">
+      </div>
+      <div class="form_field">
+        <label>First Name:
+        <input type="text" name="material">
+        </label>
+      </div>
+      <div class="form_field">
+        <label>Last Name:
+        <input type="text" name="material">
+        </label>
+      </div>
+      <div class="form_field">
+        <label>Job</label>
+        <select name="event-type">
+          <option value="concert">Curator</option>
+          <option value="lecture">Public Programs Sepcialist</option>
+          <option value="gala">Conservator</option>
+          <option value="movie">Archivist</option>
+        </select>
+      </div>    
+      <div class="form_field">
+        <input class="submit" type="submit" name="submitStudent" value="Submit">
+      </div>
+    </fieldset>
+  </form>
+  <hr>  
+  
+
+  <form action="http://classes.engr.oregonstate.edu/eecs/winter2018/cs290-400/tools/class-content/form_tests/check_request.php" method="get">
+    <fieldset>
+      <legend><h2>Remove Staff</h2></legend>
+      <div class="form_field">
+        <label>Staff ID:</label><input type="number" name="id"
+       min="10" max="100">
+      </div>
+      <div class="form_field">
+        <input class="submit" type="submit" name="submitStudent" value="Submit">
+      </div>
+    </fieldset>
+  </form> 
+
+
+  <script type="text/javascript">
+   function autorun()
+   {
+    
+   }
+   if (window.addEventListener) window.addEventListener("load", autorun, false);
+   else if (window.attachEvent) window.attachEvent("onload", autorun);
+   else window.onload = autorun;
+
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+
+  </script>
+  </body>
+</html>
