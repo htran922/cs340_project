@@ -29,18 +29,18 @@
       
     <legend><h2>Add Exhibition</h2></legend>
       <div class="form_field">
-        <label>New Exhibition ID:</label><span id="auto-gen-id">___</span>
+        <label>New Exhibition ID:</label><span id="auto-gen-id"> ___</span>
       </div>
       <div class="form_field">
       <label>Which Artifacts are in the Exhibition?</label>
       </div>
       <div class="form_field">
-        <label>Artifact ID:</label><input type="number" name="id"
-       min="10" max="100">
+        <label>Artifact ID:</label><input type="number" name="artifact_id"
+       min="1" max="100">
       </div>
       <div class="form_field">
-        <label>Room:</label><input type="number" name="id"
-       min="10" max="100">
+        <label>Room:</label><input type="varchar" name="room"
+       min="0" max="255">
       </div>
       <div class="form_field">
         <label>Subject</label>
@@ -53,11 +53,11 @@
       </div>
       <div class="form_field">
         <label>Start Date</label>
-        <input type="date" name="aq-date">
+        <input type="date" name="start-date">
       </div>
       <div class="form_field">
         <label>End Date</label>
-        <input type="date" name="aq-date">
+        <input type="date" name="end-date">
       </div>      
       <div class="form_field">
         <input class="submit" type="submit" name="submitStudent" value="Submit">
@@ -72,18 +72,18 @@
     <legend><h2>Edit Exhibition</h2></legend>
       <div class="form_field">
         <label>Exhibition ID:</label><input type="number" name="id"
-       min="10" max="100">
+       min="1" max="100">
       </div>
       <div class="form_field">
       <label>Which Artifacts are in the Exhibition?</label>
       </div>
       <div class="form_field">
-        <label>Artifact ID:</label><input type="number" name="id"
-       min="10" max="100">
+        <label>Artifact ID:</label><input type="number" name="artifact_id"
+       min="1" max="100">
       </div>
       <div class="form_field">
-        <label>Room:</label><input type="number" name="id"
-       min="10" max="100">
+        <label>Room:</label><input type="varchar" name="room"
+       min="0" max="255">
       </div>
       <div class="form_field">
         <label>Subject</label>
@@ -96,11 +96,11 @@
       </div>
       <div class="form_field">
         <label>Start Date</label>
-        <input type="date" name="aq-date">
+        <input type="date" name="start-date">
       </div>
       <div class="form_field">
         <label>End Date</label>
-        <input type="date" name="aq-date">
+        <input type="date" name="end-date">
       </div>      
       <div class="form_field">
         <input class="submit" type="submit" name="submitStudent" value="Submit">
