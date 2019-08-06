@@ -1,0 +1,37 @@
+<div class="update-form-container">
+    <h1>Update Event ID {{exhibition.id}}:</h1>
+    <form id="update-exhibition" action="/exhibition" method="post">
+        <div class="form_field">
+            <label>Artifact:
+                <select name="artifact_id" id="artifact-selector">
+                    {{#each artifact}}
+                    <option value="{{id}}">{{id}}</option>
+                    {{/each}}
+                </select>
+            </label>
+        </div>
+        <div class="form_field">
+            <label>Room:
+                <input type="text" name="room" value="{{exhibition.room}}">
+            </label>
+        </div>
+        <div class="form_field">
+            <label>Subject:</label>
+            <select name="subject">
+                <option value="Geology" {{exhibition.subject}}>Geology</option>
+                <option value="Biology" {{exhibition.subject}}>Biology</option>
+                <option value="Fossils" {{exhibition.subject}}>Fossils</option>
+            </select>
+        </div>
+        <div class="form_field">
+            <label>Start Date: </label>
+            <input type="date" name="start_date" id="start_date" value="{{exhibition.start_date}}">
+        </div>
+        <div class="form_field">
+            <label>End Date: </label>
+            <input type="date" name="end_date" id="end_date" value="{{exhibition.end_date}}">
+        </div>
+    </form>
+     <button onclick="updateExhibition({{exhibition.id}})">Update</button>
+</div>
+<script defer>selectArtifact({{exhibition.artifact_id}});</script>

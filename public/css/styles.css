@@ -1,0 +1,7 @@
+body {
+    font-family: 'Muli', sans-serif;
+}
+
+.form-container, .update-form-container{
+    margin: 5%;
+}

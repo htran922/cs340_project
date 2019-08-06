@@ -1,0 +1,71 @@
+{{> navBar}}
+
+<div class="form-container">
+    <form id="addEvent" action="/event" method="post">
+        <fieldset>
+            <legend>
+                <h2>Add Event</h2>
+            </legend>
+            <div class="form_field">
+                <label>Exhibition:
+                    <select name="exhibition_id" id="exhibition_id">
+                        {{#each exhibition}}
+                        <option value="{{id}}">{{room}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+            <div class="form_field">
+                <label>Staff:
+                    <select name="staff_id" id="staff_id">
+                        {{#each staff}}
+                        <option value="{{id}}">{{first_name}} {{last_name}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+            <div class="form_field">
+                <label>Event Type:</label>
+                <select name="type">
+                    <option value="Concert">Concert</option>
+                    <option value="Lecture">Lecture</option>
+                    <option value="Gala">Gala</option>
+                    <option value="Movie">Movie</option>
+                    <option value="Live Demonstration">Live Demonstration</option>
+                </select>
+            </div>
+            <div class="form_field">
+                <label>Date: </label>
+                <input type="date" name="date" id="date">
+            </div>
+            <div class="form_field">
+                <input class="submit" type="submit" name="submit_event" value="Add">
+            </div>
+        </fieldset>
+    </form>
+    <hr>
+
+    <h3>Event:</h3>
+    <table class="table .table-bordered">
+        <thead>
+            <th>ID</th>
+            <th>Exhibition</th>
+            <th>Staff</th>
+            <th>Type</th>
+            <th>Date</th>
+        </thead>
+        <tbody>
+            {{#each event}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{exhibition_id}}</td>
+                <td>{{staff_id}}</td>
+                <td>{{type}}</td>
+                <td>{{date}}</td>
+                <td><button onclick="deleteEvent({{id}})">Delete</button></td>
+                <td><a href="/event/{{id}}">Update</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

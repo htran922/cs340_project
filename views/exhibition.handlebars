@@ -1,0 +1,72 @@
+{{> navBar}}
+
+<div class="form-container">
+    <form id="addExhibition" action="/exhibition" method="post">
+        <fieldset>
+            <legend>
+                <h2>Add Exhibition</h2>
+            </legend>
+            <div class="form_field">
+                <label>Artifact:
+                    <select name="artifact_id" id="artifact_id">
+                        {{#each artifact}}
+                        <option value="{{id}}">{{id}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+            <div class="form_field">
+                <label>Room:
+                    <input type="text" name="room">
+                </label>
+            </div>
+            <div class="form_field">
+                <label>Subject:</label>
+                <select name="subject">
+                    <option value="Geology">Geology</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Fossils">Fossils</option>
+                </select>
+            </div>
+            <div class="form_field">
+                <label>Start Date: </label>
+                <input type="date" name="start_date" id="start_date">
+            </div>
+            <div class="form_field">
+                <label>End Date: </label>
+                <input type="date" name="end_date" id="end_date">
+            </div>
+            <div class="form_field">
+                <input class="submit" type="submit" name="submit_exhibition" value="Add">
+            </div>
+        </fieldset>
+    </form>
+    <hr>
+
+    <h3>Exhibition:</h3>
+    <table class="table .table-bordered">
+        <thead>
+            <th>ID</th>
+            <th>Artifact</th>
+            <th>Room</th>
+            <th>Subject</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+
+        </thead>
+        <tbody>
+            {{#each exhibition}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{artifact_id}}</td>
+                <td>{{room}}</td>
+                <td>{{subject}}</td>
+                <td>{{start_date}}</td>
+                <td>{{end_date}}</td>
+                <td><button onclick="deleteExhibition({{id}})">Delete</button></td>
+                <td><a href="/exhibition/{{id}}">Update</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

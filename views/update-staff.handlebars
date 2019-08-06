@@ -1,0 +1,25 @@
+<div class="update-form-container">
+    <h1>Update Staff {{staff.first_name}} {{staff.last_name}}:</h1>
+    <form id="update-staff" action="/staff" method="post">
+        <div class="form_field">
+            <label>First Name:
+                <input type="text" name="first_name" value="{{staff.first_name}}">
+            </label>
+        </div>
+        <div class="form_field">
+            <label>First Name:
+                <input type="text" name="last_name" value="{{staff.last_name}}">
+            </label>
+        </div>
+        <div class="form_field">
+            <label>Job:</label>
+            <select name="job">
+                <option value="Curator" {{staff.job}}>Curator</option>
+                <option value="Specialist" {{staff.job}}>Public Programs Sepcialist</option>
+                <option value="Conservator" {{staff.job}}>Conservator</option>
+                <option value="Archivist" {{staff.job}}>Archivist</option>
+            </select>
+        </div>
+    </form>
+    <button onclick="updateStaff({{staff.id}})">Update</button>
+</div>

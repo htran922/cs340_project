@@ -1,0 +1,57 @@
+{{> navBar}}
+
+<div class="form-container">
+    <form id="addStaff" action="/staff" method="post">
+        <fieldset>
+            <legend>
+                <h2>Add Staff</h2>
+            </legend>
+            <div class="form_field">
+                <label>First Name:
+                    <input type="text" name="first_name">
+                </label>
+            </div>
+            <div class="form_field">
+                <label>Last Name:
+                    <input type="text" name="last_name">
+                </label>
+            </div>
+            <div class="form_field">
+                <label>Job:</label>
+                <select name="job">
+                    <option value="Curator">Curator</option>
+                    <option value="Specialist">Public Programs Sepcialist</option>
+                    <option value="Conservator">Conservator</option>
+                    <option value="Archivist">Archivist</option>
+                </select>
+            </div>
+            <div class="form_field">
+                <input class="submit" type="submit" name="submit_staff" value="Add">
+            </div>
+        </fieldset>
+    </form>
+    <hr>
+
+    <h3>Staff:</h3>
+    <table class="table .table-bordered">
+        <thead>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Job</th>
+        </thead>
+        <tbody>
+            {{#each staff}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{first_name}}</td>
+                <td>{{last_name}}</td>
+                <td>{{job}}</td>
+                <td>{{damage}}</td>
+                <td><button onclick="deleteStaff({{id}})">Delete</button></td>
+                <td><a href="/staff/{{id}}">Update</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

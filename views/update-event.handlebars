@@ -1,0 +1,41 @@
+<div class="update-form-container">
+    <h1>Update Event ID {{event.id}}:</h1>
+    <form id="update-event" action="/event" method="post"></form>
+        <div class="form_field">
+            <label>Exhibition:
+                <select name="exhibition_id" id="exhibition-selector">
+                    {{#each exhibition}}
+                    <option value="{{id}}">{{room}}</option>
+                    {{/each}}
+                </select>
+            </label>
+        </div>
+        <div class="form_field">
+            <label>Staff:
+                <select name="staff_id" id="staff-selector">
+                    {{#each staff}}
+                    <option value="{{id}}">{{first_name}} {{last_name}}</option>
+                    {{/each}}
+                </select>
+            </label>
+        </div>
+        <div class="form_field">
+            <label>Event Type:</label>
+            <select name="type">
+                <option value="Concert" {{event.type}}>Concert</option>
+                <option value="Lecture" {{event.type}}>Lecture</option>
+                <option value="Gala" {{event.type}}>Gala</option>
+                <option value="Movie" {{event.type}}>Movie</option>
+                <option value="Live Demonstration" {{event.type}}>Live Demonstration</option>
+            </select>
+        </div>
+        <div class="form_field">
+            <label>Date: </label>
+            <input type="date" name="date" id="date" value="{{event.date}}">
+        </div>
+
+    </form>
+    <button onclick="updateEvent({{event.id}})">Update</button>
+</div>
+<script defer>selectStaff({{event.staff_id}});</script>
+<script defer>selectExhibition({{event.exhibition_id}});</script>

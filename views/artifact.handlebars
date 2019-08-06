@@ -1,0 +1,59 @@
+{{> navBar}}
+
+<div class="form-container">
+    <form id="addArtifact" action="/artifact" method="post">
+        <fieldset>
+            <legend>
+                <h2>Add Artifact</h2>
+            </legend>
+            <div class="form_field">
+                <label>Currently on Display:</label>
+                <input type="radio" name="display" value="1">Yes
+                <input type="radio" name="display" value="0">No
+            </div>
+            <div class="form_field">
+                <label>Aquisition Year:</label>
+                <input type="number" name="acquisition_year" min="1800" max="2019" step="1" value="2019">
+            </div>
+            <div class="form_field">
+                <label>Material:
+                    <input type="text" name="material">
+                </label>
+            </div>
+            <div class="form_field">
+                <label>Damaged:</label>
+                <input type="radio" name="damage" value="1">Yes
+                <input type="radio" name="damage" value="0">No
+
+            </div>
+            <div class="form_field">
+                <input class="submit" type="submit" name="submit_artifact" value="Add">
+            </div>
+        </fieldset>
+    </form>
+    <hr>
+
+    <h3>Artifacts:</h3>
+    <table class="table .table-bordered">
+        <thead>
+            <th>ID</th>
+            <th>On Display</th>
+            <th>Year Acquisitioned</th>
+            <th>Material</th>
+            <th>Damage</th>
+        </thead>
+        <tbody>
+            {{#each artifact}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{display}}</td>
+                <td>{{acquisition_year}}</td>
+                <td>{{material}}</td>
+                <td>{{damage}}</td>
+                <td><button onclick="deleteArtifact({{id}})">Delete</button></td>
+                <td><a href="/artifact/{{id}}">Update</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
