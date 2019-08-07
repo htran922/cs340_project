@@ -13,11 +13,52 @@ module.exports = function(){
         });
     }
 
+    function getJobs(res, mysql, context, complete){
+        mysql.pool.query("SELECT id, job FROM snhm_staff", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.staff  = results;
+            complete();
+        });
+    }
+
+    function getPeoplebyJob(req, res, mysql, context, complete){
+      var query = "SELECT id, first_name, last_name, job FROM snhm_staff WHERE snhm_staff.job = ?";
+      console.log(req.params)
+      var inserts = [req.params.staff]
+      mysql.pool.query(query, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.staff = results;
+            complete();
+        });
+    }
+
+        /* Find people whose fname starts with a given string in the req */
+    function getPeopleWithNameLike(req, res, mysql, context, complete) {
+      //sanitize the input as well as include the % character
+       var query = "SELECT id, first_name, last_name, job FROM snhm_staff WHERE first_name LIKE " + mysql.pool.escape(req.params.s + '%');
+      console.log(query)
+
+      mysql.pool.query(query, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.people = results;
+            complete();
+        });
+    }
+
     /*Display all staff in database. Requires web based javascript to delete users with AJAX*/
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteEntry.js"];
+        context.jsscripts = ["deleteEntry.js","filterEntry.js","searchEntry.js"];
         var mysql = req.app.get('mysql');
         getStaff(res, mysql, context, complete);
         function complete(){
@@ -25,6 +66,39 @@ module.exports = function(){
             if(callbackCount >= 1){
                 res.render('staff', context);
             }
+        }
+    });
+
+
+        /*Display all staff whose name starts with a given string. Requires web based javascript to delete users with AJAX */
+    router.get('/search/:s', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["deleteEntry.js","filterEntry.js","searchEntry.js"];
+        var mysql = req.app.get('mysql');
+        getPeopleWithNameLike(req, res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('staff', context);
+            }
+        }
+    });
+
+        /*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
+    router.get('/filter/:homeworld', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["deleteEntry.js","filterEntry.js","searchEntry.js"];
+        var mysql = req.app.get('mysql');
+        getPeoplebyJob(req,res, mysql, context, complete);
+        getJobs(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('staff', context);
+            }
+
         }
     });
 
