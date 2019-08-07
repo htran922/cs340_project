@@ -31,7 +31,28 @@
         </fieldset>
     </form>
     <hr>
-
+    <br>
+    <!-- Filter staff members by job -->
+    <!-- This form does not submit directly, the button handles all the interaction with backend -->
+    <form id="filter_staff" action="" method="">
+        <label>Filter by job:</label>
+        <select name="job_filter" id="job_filter">
+            {{#each staff}}
+            <option value="{{id}}">{{job}}</option>
+            {{/each}}
+        </select>
+        <input type="button" value="Filter" onclick="filterStaffByJob()">
+    </form>
+    <br>
+    <!-- Searchs staff members by first name -->
+    <!-- This form does not submit directly, the button handles all the interaction with backend -->
+    <form action="" method="">
+        <label>Search staff by first name starting with: </label>
+        <input type="text" id="first_name_search_string" name="first_name_search_string" value="">
+        <input type="button" value="Search" onclick="searchStaffByFirstName()">
+    </form>
+    <br>
+    <hr>
     <h3>Staff:</h3>
     <table class="table .table-bordered">
         <thead>
