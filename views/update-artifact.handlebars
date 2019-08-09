@@ -1,4 +1,8 @@
 <div class="update-form-container">
+    <div class="returnButton">
+        <button class="btn btn-dark" onclick="history.back()"><i class="fas fa-arrow-left"></i> Return</button>
+    </div>
+    <br>
     <h1>Update Artifact ID {{artifact.id}}:</h1>
     <form id="update-artifact" action="/artifact" method="post">
         <div class="form_field">

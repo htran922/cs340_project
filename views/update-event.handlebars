@@ -1,4 +1,8 @@
 <div class="update-form-container">
+    <div class="returnButton">
+        <button class="btn btn-dark" onclick="history.back()"><i class="fas fa-arrow-left"></i> Return</button>
+    </div>
+    <br>
     <h1>Update Event ID {{event.id}}:</h1>
     <form id="update-event" action="/event" method="post"></form>
         <div class="form_field">
