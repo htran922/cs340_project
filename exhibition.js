@@ -3,7 +3,7 @@ module.exports = function(){
     var router = express.Router();
 
     function getExhibition(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, artifact_id, room, subject, start_date, end_date FROM snhm_exhibition", function(error, results, fields){
+        mysql.pool.query("SELECT id, artifact_id, room, subject, DATE_FORMAT(start_date, '%Y-%m-%d') AS start_date, DATE_FORMAT(end_date, '%Y-%m-%d') AS end_date FROM snhm_exhibition", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();

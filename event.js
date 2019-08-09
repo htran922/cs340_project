@@ -1,10 +1,10 @@
-module.exports = function(){
+module.exports = function () {
     var express = require('express');
     var router = express.Router();
 
-    function getEvent(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, exhibition_id, staff_id, type, date FROM snhm_event", function(error, results, fields){
-            if(error){
+    function getEvent(res, mysql, context, complete) {
+        mysql.pool.query("SELECT id, exhibition_id, staff_id, type, DATE_FORMAT(date, '%Y-%m-%d') AS date FROM snhm_event", function (error, results, fields) {
+            if (error) {
                 res.write(JSON.stringify(error));
                 res.end();
             }
@@ -13,9 +13,9 @@ module.exports = function(){
         });
     }
 
-    function getExhibition(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, room FROM snhm_exhibition", function(error, results, fields){
-            if(error){
+    function getExhibition(res, mysql, context, complete) {
+        mysql.pool.query("SELECT id, room FROM snhm_exhibition", function (error, results, fields) {
+            if (error) {
                 res.write(JSON.stringify(error));
                 res.end();
             }
@@ -24,9 +24,9 @@ module.exports = function(){
         });
     }
 
-    function getStaff(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, first_name, last_name FROM snhm_staff", function(error, results, fields){
-            if(error){
+    function getStaff(res, mysql, context, complete) {
+        mysql.pool.query("SELECT id, first_name, last_name FROM snhm_staff", function (error, results, fields) {
+            if (error) {
                 res.write(JSON.stringify(error));
                 res.end();
             }
@@ -36,7 +36,7 @@ module.exports = function(){
     }
 
     /*Display all events in database. Requires web based javascript to delete users with AJAX*/
-    router.get('/', function(req, res){
+    router.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["deleteEntry.js"];
@@ -44,9 +44,10 @@ module.exports = function(){
         getEvent(res, mysql, context, complete);
         getExhibition(res, mysql, context, complete);
         getStaff(res, mysql, context, complete);
-        function complete(){
+
+        function complete() {
             callbackCount++;
-            if(callbackCount >= 3){
+            if (callbackCount >= 3) {
                 res.render('event', context);
             }
         }
@@ -69,16 +70,16 @@ module.exports = function(){
     });
 
     /* Route to delete an event, simply returns a 202 upon success. Ajax will handle this. */
-    router.delete('/:id', function(req, res){
+    router.delete('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM snhm_event WHERE id = ?";
         var inserts = [req.params.id];
-        sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-            if(error){
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
                 res.write(JSON.stringify(error));
                 res.status(400);
                 res.end();
-            }else{
+            } else {
                 console.log('Event successfully deleted');
                 res.status(202).end();
             }
@@ -86,11 +87,11 @@ module.exports = function(){
     });
 
     /* Get one event */
-    function getOneEvent (res, mysql, context, id, complete){
+    function getOneEvent(res, mysql, context, id, complete) {
         var sql = "SELECT id, exhibition_id, staff_id, type, date FROM snhm_event WHERE id = ?";
         var inserts = [id];
-        mysql.pool.query(sql, inserts, function(error, results, fields){
-            if(error){
+        mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
                 res.write(JSON.stringify(error));
                 res.end();
             }
@@ -100,7 +101,7 @@ module.exports = function(){
     }
 
     /* Display one artifact for the specific purpose of updating artifacts */
-    router.get('/:id', function(req, res){
+    router.get('/:id', function (req, res) {
         callbackCount = 0;
         var context = {};
         context.jsscripts = ["selectedEntry.js", "updateEntry.js"];
@@ -108,24 +109,25 @@ module.exports = function(){
         getOneEvent(res, mysql, context, req.params.id, complete);
         getExhibition(res, mysql, context, complete);
         getStaff(res, mysql, context, complete);
-        function complete(){
+
+        function complete() {
             callbackCount++;
-            if(callbackCount >= 3){
+            if (callbackCount >= 3) {
                 res.render('update-event', context);
             }
         }
     });
 
     /* The URL that update data is sent to in order to update a person */
-    router.put('/:id', function(req, res){
+    router.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
         var sql = "UPDATE snhm_event SET exhibition_id=?, staff_id=?, type=?, date=? WHERE id=?";
         var inserts = [req.body.exhibition_id, req.body.staff_id, req.body.type, req.body.date, req.params.id];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
                 res.write(JSON.stringify(error));
                 res.end();
-            }else{
+            } else {
                 res.status(200);
                 res.end();
             }
