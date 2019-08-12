@@ -27,34 +27,6 @@ module.exports = function(){
         });
     }
 
-    /* Used for the filter functionality */
-    function getJobs(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, job FROM snhm_staff", function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.staff = results;
-            complete();
-        });
-    }
-
-    /* Used for the filter functionality */
-    function getStaffbyJob(req, res, mysql, context, complete){
-      var query = "SELECT id, first_name, last_name, job FROM snhm_staff WHERE snhm_staff.job = ?";
-      console.log(req.params)
-      var inserts = [req.params.staff]
-      mysql.pool.query(query, inserts, function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.staff = results;
-            complete();
-        });
-    }
-
-
     /* Used for search functionality */
 
     function getStaffWithNameLike(req, res, mysql, context, complete) {
