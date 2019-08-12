@@ -75,7 +75,7 @@ module.exports = function(){
 
     /* Get one exhibition */
     function getOneExhibition (res, mysql, context, id, complete){
-        var sql = "SELECT id, artifact_id, room, subject, start_date, end_date FROM snhm_exhibition WHERE id = ?";
+        var sql = "SELECT id, artifact_id, room, subject, DATE_FORMAT(start_date, '%Y-%m-%d') AS start_date, DATE_FORMAT(end_date, '%Y-%m-%d') AS end_date FROM snhm_exhibition WHERE id = ?";
         var inserts = [id];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){

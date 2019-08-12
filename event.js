@@ -88,7 +88,7 @@ module.exports = function () {
 
     /* Get one event */
     function getOneEvent(res, mysql, context, id, complete) {
-        var sql = "SELECT id, exhibition_id, staff_id, type, date FROM snhm_event WHERE id = ?";
+        var sql = "SELECT id, exhibition_id, staff_id, type, DATE_FORMAT(date, '%Y-%m-%d') AS date FROM snhm_event WHERE id = ?";
         var inserts = [id];
         mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {

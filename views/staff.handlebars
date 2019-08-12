@@ -26,7 +26,7 @@
                 </select>
             </div>
             <div class="form_field">
-                <input class="submit" type="submit" name="submit_staff" value="Add">
+                <input class="btn btn-info" type="submit" name="submit_staff" value="Add">
             </div>
         </fieldset>
     </form>
@@ -55,24 +55,25 @@
     <hr>
     <h3>Staff:</h3>
     <table class="table .table-bordered">
-        <thead>
+        <thead class="thead-dark">
             <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Job</th>
+            <th></th>
+            <th></th>
         </thead>
-        <tbody>
-            {{#each staff}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{first_name}}</td>
-                <td>{{last_name}}</td>
-                <td>{{job}}</td>
-                <td>{{damage}}</td>
-                <td><button onclick="deleteStaff({{id}})">Delete</button></td>
-                <td><a href="/staff/{{id}}">Update</a></td>
-            </tr>
-            {{/each}}
-        </tbody>
+        
+        {{#each staff}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{first_name}}</td>
+            <td>{{last_name}}</td>
+            <td>{{job}}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteStaff({{id}})">Delete</button></td>
+            <td><a href="/staff/{{id}}"><input class="btn btn-warning btn-sm" type="button" value="Update"></a></td>
+        </tr>
+        {{/each}}
+        
     </table>
 </div>
