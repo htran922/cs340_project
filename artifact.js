@@ -8,7 +8,29 @@ module.exports = function () {
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.artifact = results;
+            var params = [];
+            for (var item in results){
+                var addArtifact = {
+                    'id':results[item].id,
+                    'acquisition_year':results[item].acquisition_year,
+                    'material':results[item].material
+                }
+
+                if (results[item].display){
+                    addArtifact.display = "Yes";
+                } else {
+                    addArtifact.display = "No";
+                }
+
+                if (results[item].damage){
+                    addArtifact.damage = "Yes";
+                } else {
+                    addArtifact.damage = "No";
+                }
+                
+                params.push(addArtifact);
+            }
+            context.artifact = params;
             complete();
         });
     }

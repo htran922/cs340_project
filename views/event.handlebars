@@ -39,7 +39,7 @@
                 <input type="date" name="date" id="date">
             </div>
             <div class="form_field">
-                <input class="submit" type="submit" name="submit_event" value="Add">
+                <input class="btn btn-info" type="submit" name="submit_event" value="Add">
             </div>
         </fieldset>
     </form>
@@ -47,25 +47,25 @@
 
     <h3>Event:</h3>
     <table class="table .table-bordered">
-        <thead>
+        <thead class="thead-dark">
             <th>ID</th>
             <th>Exhibition</th>
             <th>Staff</th>
             <th>Type</th>
             <th>Date</th>
+            <th></th>
+            <th></th>
         </thead>
-        <tbody>
-            {{#each event}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{exhibition_id}}</td>
-                <td>{{staff_id}}</td>
-                <td>{{type}}</td>
-                <td>{{date}}</td>
-                <td><button onclick="deleteEvent({{id}})">Delete</button></td>
-                <td><a href="/event/{{id}}">Update</a></td>
-            </tr>
-            {{/each}}
-        </tbody>
+        {{#each event}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{exhibition_id}}</td>
+            <td>{{staff_id}}</td>
+            <td>{{type}}</td>
+            <td>{{date}}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteEvent({{id}})">Delete</button></td>
+            <td><a href="/event/{{id}}"><input class="btn btn-warning btn-sm" type="button" value="Update"></a></td>
+        </tr>
+        {{/each}}
     </table>
 </div>

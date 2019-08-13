@@ -21,6 +21,7 @@ app.use('/artifact', require('./artifact.js'));
 app.use('/staff', require('./staff.js'));
 app.use('/event', require('./event.js'));
 app.use('/exhibition', require('./exhibition.js'));
+app.use('/staff_exhibition', require('./staff_exhibition.js'));
 
 app.get('/', (req, res) => {
     res.render('index');

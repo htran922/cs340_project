@@ -8,7 +8,7 @@
             </legend>
             <div class="form_field">
                 <label>Currently on Display:</label>
-                <input type="radio" name="display" value="1">Yes
+                <input type="radio" name="display" value="1" checked>Yes
                 <input type="radio" name="display" value="0">No
             </div>
             <div class="form_field">
@@ -22,12 +22,12 @@
             </div>
             <div class="form_field">
                 <label>Damaged:</label>
-                <input type="radio" name="damage" value="1">Yes
+                <input type="radio" name="damage" value="1" checked>Yes
                 <input type="radio" name="damage" value="0">No
 
             </div>
             <div class="form_field">
-                <input class="submit" type="submit" name="submit_artifact" value="Add">
+                <input class="btn btn-info" type="submit" name="submit_artifact" value="Add">
             </div>
         </fieldset>
     </form>
@@ -35,25 +35,26 @@
 
     <h3>Artifacts:</h3>
     <table class="table .table-bordered">
-        <thead>
+        <thead class="thead-dark">
             <th>ID</th>
             <th>On Display</th>
             <th>Year Acquisitioned</th>
             <th>Material</th>
             <th>Damage</th>
+            <th></th>
+            <th></th>
         </thead>
-        <tbody>
-            {{#each artifact}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{display}}</td>
-                <td>{{acquisition_year}}</td>
-                <td>{{material}}</td>
-                <td>{{damage}}</td>
-                <td><button onclick="deleteArtifact({{id}})">Delete</button></td>
-                <td><a href="/artifact/{{id}}">Update</a></td>
-            </tr>
-            {{/each}}
-        </tbody>
+        {{#each artifact}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{display}}</td>
+            <td>{{acquisition_year}}</td>
+            <td>{{material}}</td>
+            <td>{{damage}}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteArtifact({{id}})">Delete</button></td>
+            <td><a href="/artifact/{{id}}"><input class="btn btn-warning btn-sm" type="button" value="Update"></a></td>
+        </tr>
+        {{/each}}
+    
     </table>
 </div>

@@ -37,7 +37,7 @@
                 <input type="date" name="end_date" id="end_date">
             </div>
             <div class="form_field">
-                <input class="submit" type="submit" name="submit_exhibition" value="Add">
+                <input class="btn btn-info" type="submit" name="submit_exhibition" value="Add">
             </div>
         </fieldset>
     </form>
@@ -45,28 +45,28 @@
 
     <h3>Exhibition:</h3>
     <table class="table .table-bordered">
-        <thead>
+        <thead class="thead-dark">
             <th>ID</th>
             <th>Artifact</th>
             <th>Room</th>
             <th>Subject</th>
             <th>Start Date</th>
             <th>End Date</th>
+            <th></th>
+            <th></th>
 
         </thead>
-        <tbody>
-            {{#each exhibition}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{artifact_id}}</td>
-                <td>{{room}}</td>
-                <td>{{subject}}</td>
-                <td>{{start_date}}</td>
-                <td>{{end_date}}</td>
-                <td><button onclick="deleteExhibition({{id}})">Delete</button></td>
-                <td><a href="/exhibition/{{id}}">Update</a></td>
-            </tr>
-            {{/each}}
-        </tbody>
+        {{#each exhibition}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{artifact_id}}</td>
+            <td>{{room}}</td>
+            <td>{{subject}}</td>
+            <td>{{start_date}}</td>
+            <td>{{end_date}}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteExhibition({{id}})">Delete</button></td>
+            <td><a href="/exhibition/{{id}}"><input class="btn btn-warning btn-sm" type="button" value="Update"></a></td>
+        </tr>
+        {{/each}}
     </table>
 </div>

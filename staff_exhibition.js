@@ -1,36 +1,36 @@
-module.exports = function () {
+module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    function getEvent(res, mysql, context, complete) {
-        mysql.pool.query("SELECT id, exhibition_id, staff_id, type, DATE_FORMAT(date, '%Y-%m-%d') AS date FROM snhm_event", function (error, results, fields) {
-            if (error) {
+    function getStaffExhibition(res, mysql, context, complete){
+        mysql.pool.query("SELECT staff_id, exhibition_id FROM snhm_staff_exhibition", function (error, results, fields){
+            if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.event = results;
+            context.staff_exhibition = results;
+            complete();
+        });
+    }
+
+    function getStaff(res, mysql, context, complete){
+        mysql.pool.query("SELECT id FROM snhm_staff", function (error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.staff = results;
             complete();
         });
     }
 
     function getExhibition(res, mysql, context, complete) {
-        mysql.pool.query("SELECT id, room FROM snhm_exhibition", function (error, results, fields) {
+        mysql.pool.query("SELECT id FROM snhm_exhibition", function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
                 res.end();
             }
             context.exhibition = results;
-            complete();
-        });
-    }
-
-    function getStaff(res, mysql, context, complete) {
-        mysql.pool.query("SELECT id, first_name, last_name FROM snhm_staff", function (error, results, fields) {
-            if (error) {
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.staff = results;
             complete();
         });
     }
@@ -41,14 +41,14 @@ module.exports = function () {
         var context = {};
         context.jsscripts = ["deleteEntry.js"];
         var mysql = req.app.get('mysql');
-        getEvent(res, mysql, context, complete);
+        getStaffExhibition(res, mysql, context, complete);
         getExhibition(res, mysql, context, complete);
         getStaff(res, mysql, context, complete);
 
         function complete() {
             callbackCount++;
             if (callbackCount >= 3) {
-                res.render('event', context);
+                res.render('staff_exhibition', context);
             }
         }
     });
@@ -56,23 +56,23 @@ module.exports = function () {
     /* Adds an event, redirects to the event page after adding */
     router.post('/', function (req, res) {
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO snhm_event (exhibition_id, staff_id, type, date) VALUES (?,?,?,?)";
-        var inserts = [req.body.exhibition_id, req.body.staff_id, req.body.type, req.body.date];
+        var sql = "INSERT INTO snhm_staff_exhibition (staff_id, exhibition_id) VALUES (?,?)";
+        var inserts = [req.body.staff_id, req.body.exhibition_id];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
                 console.log(JSON.stringify(error))
                 res.write(JSON.stringify(error));
                 res.end();
             } else {
-                res.redirect('/event');
+                res.redirect('/staff_exhibition');
             }
         });
     });
 
-    /* Route to delete an event, simply returns a 202 upon success. Ajax will handle this. */
+/* Route to delete an event, simply returns a 202 upon success. Ajax will handle this. */
     router.delete('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM snhm_event WHERE id = ?";
+        var sql = "DELETE FROM snhm_staff_exhibition WHERE staff_id = ?";
         var inserts = [req.params.id];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
@@ -84,11 +84,11 @@ module.exports = function () {
                 res.status(202).end();
             }
         })
-    });
+    });    
 
     /* Get one event */
-    function getOneEvent(res, mysql, context, id, complete) {
-        var sql = "SELECT id, exhibition_id, staff_id, type, DATE_FORMAT(date, '%Y-%m-%d') AS date FROM snhm_event WHERE id = ?";
+    function getOneStaffExhibition(res, mysql, context, id, complete) {
+        var sql = "SELECT staff_id, exhibition_id FROM snhm_staff_exhibition WHERE staff_id = ?";
         var inserts = [id];
         mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
@@ -106,23 +106,23 @@ module.exports = function () {
         var context = {};
         context.jsscripts = ["selectedEntry.js", "updateEntry.js"];
         var mysql = req.app.get('mysql');
-        getOneEvent(res, mysql, context, req.params.id, complete);
+        getOneStaffExhibition(res, mysql, context, req.params.id, complete);
         getExhibition(res, mysql, context, complete);
         getStaff(res, mysql, context, complete);
 
         function complete() {
             callbackCount++;
             if (callbackCount >= 3) {
-                res.render('update-event', context);
+                res.render('update-staff-exhibition', context);
             }
         }
     });
 
-    /* The URL that update data is sent to in order to update a person */
+        /* The URL that update data is sent to in order to update a person */
     router.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE snhm_event SET exhibition_id=?, staff_id=?, type=?, date=? WHERE id=?";
-        var inserts = [req.body.exhibition_id, req.body.staff_id, req.body.type, req.body.date, req.params.id];
+        var sql = "UPDATE snhm_staff_exhibition SET staff_id=?, exhibition_id=?";
+        var inserts = [req.body.staff_id, req.body.exhibition_id];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));

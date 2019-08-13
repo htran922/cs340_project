@@ -1,0 +1,30 @@
+<div class="update-form-container">
+    <div class="returnButton">
+        <button class="btn btn-dark" onclick="history.back()"><i class="fas fa-arrow-left"></i> Return</button>
+    </div>
+    <br>
+    <h1>Update Staff ID {{staff_exhibition.staff_id}} and Exhibition ID{{staff_exhibition.exhibition_id}}:</h1>
+    <form id="update-staff-exhibition" action="/staff_exhibition" method="post"></form>
+        <div class="form_field">
+                <label>Staff ID:
+                    <select name="staff_id" id="staff_id">
+                        {{#each staff}}
+                        <option value="{{id}}">{{id}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+            <div class="form_field">
+                <label>Exhibition ID:
+                    <select name="exhibition_id" id="exhibition_id">
+                        {{#each exhibition}}
+                        <option value="{{id}}">{{id}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+    </form>
+    <button onclick="updateStaffExhibition({{staff_id}})">Update</button>
+</div>
+<script defer>selectStaff({{staff_exhibition.staff_id}});</script>
+<script defer>selectExhibition({{staff_exhibition.exhibition_id}});</script>

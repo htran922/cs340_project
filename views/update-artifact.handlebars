@@ -1,9 +1,13 @@
 <div class="update-form-container">
+    <div class="returnButton">
+        <button class="btn btn-dark" onclick="history.back()"><i class="fas fa-arrow-left"></i> Return</button>
+    </div>
+    <br>
     <h1>Update Artifact ID {{artifact.id}}:</h1>
     <form id="update-artifact" action="/artifact" method="post">
         <div class="form_field">
             <label>Currently on Display:</label>
-            <input type="radio" name="display" value="1" {{artifact.display}}>Yes
+            <input type="radio" name="display" value="1" checked {{artifact.display}}>Yes
             <input type="radio" name="display" value="0" {{artifact.display}}>No
         </div>
         <div class="form_field">
@@ -18,7 +22,7 @@
         </div>
         <div class="form_field">
             <label>Damaged:</label>
-            <input type="radio" name="damage" value="1" {{artifact.damage}}>Yes
+            <input type="radio" name="damage" value="1" checked {{artifact.damage}}>Yes
             <input type="radio" name="damage" value="0" {{artifact.damage}}>No
 
         </div>

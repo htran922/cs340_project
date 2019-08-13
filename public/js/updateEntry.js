@@ -42,3 +42,13 @@ function updateExhibition(id){
   })
 };
 
+function updateStaffExhibition(id){
+  $.ajax({
+      url: '/staff_exhibition/' + id,
+      type: 'PUT',
+      data: $('#update-staff-exhibition').serialize(),
+      success: function(result){
+          window.location.replace("./");
+      }
+  })
+};
