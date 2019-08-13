@@ -9,13 +9,64 @@
         visitors, employees, exhibitions, artifacts, and events held at the museum.</p>
 </div>
 
-<p>The entities in our database are: </p>
-<ul>
-    <li> Artifact </li>
-    <li> Event </li>
-    <li> Exhibition </li>
-    <li> Staff </li> 
-    <li> Artifact_Exhibition </li>
-    <li> Staff_Exhibition </li>
-    <li> Staff_Event </li>
-</ul>
+<div class="home-text">
+    <h3>The entities in our database are: </h3>
+    <ul>
+        <li> Artifact
+            <ul>
+                <li>*Artifact ID</li>
+                <li>Display</li>
+                <li>Acquisition Year</li>
+                <li>Material</li>
+                <li>Damage</li>
+            </ul>
+        </li>
+
+        <li> Event 
+            <ul>
+                <li>*Event ID</li>
+                <li>*Exhibition ID</li>
+                <li>*Staff ID</li>
+                <li>Type of Event</li>
+                <li>Date</li>
+            </ul>
+        </li>
+
+        <li> Exhibition 
+            <ul>
+                <li>*Exhibition ID</li>
+                <li>*Artifact ID</li>
+                <li>Room</li>
+                <li>Start Date</li>
+                <li>End Date</li>
+            </ul>
+        </li>
+
+        <li> Staff 
+            <ul>
+                <li>*Staff ID</li>
+                <li>First Name</li>
+                <li>Last Name</li>
+                <li>Job</li>
+            </ul>
+        </li>
+        <li> Artifact_Exhibition 
+            <ul>
+                <li>Artifact ID</li>
+                <li>Exhibition ID</li>
+            </ul>
+        </li>
+        <li> Staff_Exhibition 
+            <ul>
+                <li>Staff ID</li>
+            <li>Exhibition ID</li>
+            </ul>
+        </li>
+        <li> Staff_Event 
+            <ul>
+                <li>Staff ID</li>
+                <li>Event ID</li>
+            </ul>
+        </li>
+    </ul>
+</div>

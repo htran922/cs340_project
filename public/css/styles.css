@@ -2,6 +2,6 @@ body {
     font-family: 'Muli', sans-serif;
 }
 
-.form-container, .update-form-container{
+.form-container, .update-form-container, .home-text{
     margin: 5%;
 }
