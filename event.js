@@ -2,8 +2,9 @@ module.exports = function () {
     var express = require('express');
     var router = express.Router();
 
+    // inner join to show exhibition room and staff first name instead of their id's
     function getEvent(res, mysql, context, complete) {
-        mysql.pool.query("SELECT id, exhibition_id, staff_id, type, DATE_FORMAT(date, '%Y-%m-%d') AS date FROM snhm_event", function (error, results, fields) {
+        mysql.pool.query("SELECT se.id AS id, sx.room AS exhibition_id, ss.first_name AS staff_id, se.type AS type, DATE_FORMAT(se.date, '%Y-%m-%d') AS date FROM snhm_event se INNER JOIN snhm_exhibition AS sx ON se.exhibition_id = sx.id INNER JOIN snhm_staff AS ss ON se.staff_id = ss.id", function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
                 res.end();
