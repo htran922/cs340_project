@@ -37,3 +37,13 @@ function deleteExhibition(id){
     }
   });
 }
+
+function deleteStaffExhibition(id){
+  $.ajax({
+    url:'/staff_exhibition/' + id,
+    type: 'DELETE',
+    success: function(results){
+      window.location.reload(true);
+    }
+  });
+}

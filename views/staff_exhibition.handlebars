@@ -1,0 +1,56 @@
+{{> navBar}}
+
+<div class="form-container">
+    <form id="addStaffExhibition" action="/staff_exhibition" method="post">
+        <fieldset>
+            <legend>
+                <h2>Add Staff Exhibition Relationship</h2>
+                <p>One staff member can work on many exhibitions, while one exhibition is worked on by many staff members.</p>
+            </legend>
+            <div class="form_field">
+                <label>Staff ID:
+                    <select name="staff_id" id="staff_id">
+                        {{#each staff}}
+                        <option value="{{id}}">{{id}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+            <div class="form_field">
+                <label>Exhibition ID:
+                    <select name="exhibition_id" id="exhibition_id">
+                        {{#each exhibition}}
+                        <option value="{{id}}">{{id}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+            <div class="form_field">
+                <input class="btn btn-info" type="submit" name="submit_staff_exhibition" value="Add">
+            </div>
+        </fieldset>
+    </form>
+    <hr>
+
+    <br>
+    <hr>
+    <h3>Staff and Related Exhibitions:</h3>
+    <table class="table .table-bordered">
+        <thead class="thead-dark">
+            <th>Staff ID</th>
+            <th>Exhibition ID</th>
+            <th></th>
+            <th></th>
+        </thead>
+        
+        {{#each staff_exhibition}}
+        <tr>
+            <td>{{staff_id}}</td>
+            <td>{{exhibition_id}}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteStaffExhibition({{staff_id}})">Delete</button></td>
+            <td><a href="/staff_exhibition/{{staff_id}}"><input class="btn btn-warning btn-sm" type="button" value="Update"></a></td>
+        </tr>
+        {{/each}}
+        
+    </table>
+</div>

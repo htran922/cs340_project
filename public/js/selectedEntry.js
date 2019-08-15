@@ -9,3 +9,7 @@ function selectExhibition(id){
 function selectArtifact(id){
     $("#artifact-selector").val(id);
 }
+
+function selectStaffExhibition(id){
+    $("#staff-exhibition-selector").val(id);
+}
