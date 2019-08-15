@@ -113,6 +113,7 @@ module.exports = function(){
         function complete() {
             callbackCount++;
             if (callbackCount >= 3) {
+                console.log(context.event.staff_id);
                 res.render('update-staff-exhibition', context);
             }
         }
@@ -121,8 +122,8 @@ module.exports = function(){
         /* The URL that update data is sent to in order to update a person */
     router.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE snhm_staff_exhibition SET staff_id=?, exhibition_id=?";
-        var inserts = [req.body.staff_id, req.body.exhibition_id];
+        var sql = "UPDATE snhm_staff_exhibition SET staff_id=?, exhibition_id=? WHERE staff_id=?";
+        var inserts = [req.body.staff, req.body.exhibition, req.params.id];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));

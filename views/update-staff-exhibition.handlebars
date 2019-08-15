@@ -3,7 +3,7 @@
         <button class="btn btn-dark" onclick="history.back()"><i class="fas fa-arrow-left"></i> Return</button>
     </div>
     <br>
-    <h1>Update Staff ID {{staff_exhibition.staff_id}} and Exhibition ID{{staff_exhibition.exhibition_id}}:</h1>
+    <h1>Update Staff ID {{event.staff_id}} and Exhibition ID {{event.exhibition_id}}:</h1>
     <form id="update-staff-exhibition" action="/staff_exhibition" method="post"></form>
         <div class="form_field">
                 <label>Staff ID:
@@ -24,7 +24,8 @@
                 </label>
             </div>
     </form>
-    <button onclick="updateStaffExhibition({{staff_id}})">Update</button>
+    <button onclick="updateStaffExhibition({{event.staff_id}})">Update</button>
 </div>
-<script defer>selectStaff({{staff_exhibition.staff_id}});</script>
-<script defer>selectExhibition({{staff_exhibition.exhibition_id}});</script>
+<!---<select defer>selectStaffExhibition({{staff_id}})</select>
+<script defer>selectStaff({{staff.id}});</script>
+<script defer>selectExhibition({{exhibition.id}});</script>-->

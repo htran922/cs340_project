@@ -21,10 +21,11 @@ function updateStaff(id){
 };
 
 function updateEvent(id){
+  var data = {exhibition:$('#exhibition-selector > option:selected').text(), staff:$('#staff-selector > option:selected').text(), type:$('#event-selector > option:selected').text(), date:$('#date').serialize()}
   $.ajax({
       url: '/event/' + id,
       type: 'PUT',
-      data: $('#update-event').serialize(),
+      data ,
       success: function(result){
           window.location.replace("./");
       }
@@ -43,10 +44,11 @@ function updateExhibition(id){
 };
 
 function updateStaffExhibition(id){
+  var data = {staff:$('#staff_id > option:selected').text(), exhibition:$('#exhibition_id > option:selected').text()}
   $.ajax({
       url: '/staff_exhibition/' + id,
       type: 'PUT',
-      data: $('#update-staff-exhibition').serialize(),
+      data ,
       success: function(result){
           window.location.replace("./");
       }
